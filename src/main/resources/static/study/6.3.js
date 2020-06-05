@@ -110,12 +110,12 @@ SuperClass.prototype.sayName = function () {
 
 function SubClass(name, age) {
     // 继承属性
-    SuperClass.call(this, name);// 第二次调用父类构造函数，再次继承了name、colors属性，并重写了原有到同名属性，并赋值
+    SuperClass.call(this, name);// 第二次调用父类构造函数，子类实例中继承了name、colors属性，并重写了原型中到同名属性，并赋值
     this.age = age;
 }
 
 // 继承方法
-SubClass.prototype = new SuperClass();// 第一次调用父类构造函数，子类中继承了name、colors属性，但此时都是undefined，未赋值
+SubClass.prototype = new SuperClass();// 第一次调用父类构造函数，子类原型中继承了name、colors属性，但此时都是undefined，未赋值
 // 扩展子类方法
 SubClass.prototype.sayAge = function () {
     return this.age;
