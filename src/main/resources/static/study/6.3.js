@@ -137,7 +137,7 @@ console.log("======================================\n");
 /**
  * 组合继承总结：
  *  - 优点：构造函数继承属性，原型链继承方法，实现了实例之间属性不互相影响，方法公用的特点
- *  - 缺点：出现了2次调用（不必要）
+ *  - 缺点：出现了2次调用（不必要），影响效率
  */
 
 // ------------------------- 原型式继承 -------------------------
@@ -169,3 +169,75 @@ console.log("原型式继承：p2.name=" + p2.name);
 console.log("原型式继承：p2.friends=" + p2.friends);
 console.log("原型式继承：person.name=" + person.name);
 console.log("原型式继承：person.friends=" + person.friends);
+console.log("\"======================================\n")
+
+/**
+ * 原型式继承总结：类似原型链继承，实例之间的属性（引用）会互相影响，比如数组
+ */
+
+// ------------------------- 寄生式组合继承 -------------------------
+function getPrototype(o) {
+    function F() {
+    }
+
+    F.prototype = o;
+    return new F();
+}
+
+/**
+ * - 创建父类的原型副本，将其副本赋值给子类原型，避免通过创建父类对象实例来赋值子类原型</br>
+ * - 不推荐: subType.prototype = new SuperType();
+ * @param subType
+ * @param superType
+ */
+function inheritPrototype(subType, superType) {
+    // 创建对象，作为子类的基础对象
+    let prototype = getPrototype(superType.prototype);
+    // 原型重写之后，会失去默认到constructor属性
+    prototype.constructor = subType;
+    // 将创建的父类副本赋值给子类原型
+    subType.prototype = prototype;
+}
+
+// 父类构造函数，用构造函数定义属性
+function SuperUser(name) {
+    this.name = name;
+    this.friends = ["Joy", "Ella", "Allen"];
+}
+
+// 用原型链的方式扩展父类方法，达到方法共用，避免浪费内存空间
+SuperUser.prototype.getName = function () {
+    return this.name;
+}
+
+function SubUser(name, age) {
+    // 调用父类构造函数，实现属性继承
+    SuperUser.call(this, name);
+    // 扩展属性
+    this.age = age;
+}
+
+// 继承父类，不再创建父类原型对象实例来扩展子类，会将父类到属性添加到子类原型中，这是不必要的
+inheritPrototype(SubUser, SuperUser);
+
+SubUser.prototype.getAge = function () {
+    return this.age;
+}
+
+let user1 = new SubUser("AD-1", 1);
+user1.friends.push("Lucas");
+console.log("寄生式组合继承：name=" + user1.getName());
+console.log("寄生式组合继承：friends=" + user1.friends);
+console.log("-----------------------------------");
+
+let user2 = new SubUser("AD-2", 2);
+user2.friends.push("TheShy");
+console.log("寄生式组合继承：name=" + user2.getName());
+console.log("寄生式组合继承：friends=" + user2.friends);
+
+/**
+ * 寄生式组合继承总结：
+ * - 采用构造函数继承属性，实例之间对属性（包括引用属性）的修改不会互相影响
+ * - 不直接采用创建父类对象对子类原型进行重写，父类中的构造函数会包含属性，会导致子类原型中也包含该属性
+ * - 创建父类原型副本，将其赋值给子类原型
+ */
