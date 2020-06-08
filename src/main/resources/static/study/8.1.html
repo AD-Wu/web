@@ -25,20 +25,21 @@
 
     // --------------------------- 间歇性调用 -------------------------
 
-   /*
-   let intervalID = window.setInterval(function () {
-        console.log("Hello world,now is : " + Date());
-    }, 1000);
-    window.setTimeout(function () {
-        console.log("取消间歇性执行函数");
-        // 取消间歇性函数很重要，否则将一直执行到页面卸载
-        clearInterval(intervalID);
-    }, 5000);
-    */
+    /*
+    let intervalID = window.setInterval(function () {
+         console.log("Hello world,now is : " + Date());
+     }, 1000);
+     window.setTimeout(function () {
+         console.log("取消间歇性执行函数");
+         // 取消间歇性函数很重要，否则将一直执行到页面卸载
+         clearInterval(intervalID);
+     }, 5000);
+     */
 
     // --------------------------- 使用超时调用实现间歇性调用，也是实际开发中间歇性调用的最佳模式 -------------------------
 
 
+    /*
     function sayHello() {
         let count = 0;
         let max = 1;
@@ -48,6 +49,18 @@
         }
     }
     setTimeout(sayHello, 1000);
+    */
 
+    // -------------------------- 对话框 --------------------------
+    if (confirm("Are you sure?")) {
+        alert("I'm so glad you are sure!");
+    } else {
+        alert("I'm sorry to hear you're not sure.");
+    }
+
+    let msg = prompt("What is your name?", "");
+    if (msg !== null) {
+        alert("Welcome, " + msg);
+    }
 </script>
 </html>
