@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Frameset Example</title>
+</head>
+<script>
+    // --------------------------- 打开窗口 -------------------------
+    /*
+    (function f() {
+        window.open("https://www.baidu.com","AD");
+        window.open("https://www.baidu.com","AD1","height=400,width=400,top=10,left=10,resizeable=yes");
+    })();
+    */
+
+    // --------------------------- 超时调用 -------------------------
+
+    /*
+    let timeoutID = window.setTimeout(function () {
+        alert("超时函数,将在5秒后执行，时间单位：毫秒")
+    }, 5000);
+    // 在指定的时间未过去之前，将定时函数取消
+    clearTimeout(timeoutID);
+    */
+
+    // --------------------------- 间歇性调用 -------------------------
+
+   /*
+   let intervalID = window.setInterval(function () {
+        console.log("Hello world,now is : " + Date());
+    }, 1000);
+    window.setTimeout(function () {
+        console.log("取消间歇性执行函数");
+        // 取消间歇性函数很重要，否则将一直执行到页面卸载
+        clearInterval(intervalID);
+    }, 5000);
+    */
+
+    // --------------------------- 使用超时调用实现间歇性调用，也是实际开发中间歇性调用的最佳模式 -------------------------
+
+
+    function sayHello() {
+        let count = 0;
+        let max = 1;
+        console.log("Hello World, now time is:" + Date());
+        if (++count === max) {
+            setTimeout(sayHello, 1000);
+        }
+    }
+    setTimeout(sayHello, 1000);
+
+</script>
+</html>
