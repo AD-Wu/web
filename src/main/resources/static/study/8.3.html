@@ -5,6 +5,41 @@
     <title>Navigator对象</title>
 </head>
 <body>
+<script>
+    <!--  在非IE浏览器中检测插件  -->
+    function checkPlugins() {
+        let plugins = navigator.plugins;
+        for (let i = 0; i < plugins.length; ++i) {
+            let p = plugins[i];
+            console.log("name:" + p.name);
+            console.log("description:" + p.description);
+            console.log("filename:" + p.filename);
+            console.log("length:" + p.length);
+            console.log("------------------");
 
+        }
+    }
+
+    checkPlugins();
+
+    // 查询历史访问记录页数，不能和history.back(),forward()放在一起使用，会无限循环
+    alert(history.length);
+    // history.back();
+    // history.forward();
+
+    (function () {
+        if (history.length !== 0) {
+            // history对象
+            history.go("https://www.baidu.com");
+            // 后退一页
+            history.go(-1);
+            history.back();
+            // 前进一页
+            history.go(1);
+            history.forward();
+        }
+    })();
+
+</script>
 </body>
 </html>
