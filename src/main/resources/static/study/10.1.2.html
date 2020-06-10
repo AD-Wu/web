@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document类型</title>
+</head>
+<body>
+<script>
+    function getElement() {
+        // let html = document.documentElement;
+        // alert("html===document.childNodes[1]:" + html === document.childNodes[1]);
+        // alert("html===document.firstChild:" + html === document.firstChild);
+        // let nodes = document.childNodes;
+        // alert(nodes.length);
+        // for (let i = 0, L = nodes.length; i < L; ++i) {
+        //     if (html === nodes[i]) {
+        //         alert(i);
+        //     }
+        // }
+
+        alert(document.doctype.nodeName);
+        alert(document.documentElement.nodeName);
+        alert(document.body.nodeName);// 使用频率高
+        alert(document.title);
+
+        let url = document.URL;// 获取页面URL，如：http://www.x.com/hello
+        let domain = document.domain;// 获取页面域名，与URL相对应，如：www.x.com
+        let referrer = document.referrer;// 获取来源页面的URL，即从哪一个页面跳转到当前页面，可能出现空字符串
+        alert(url);
+        alert(domain);
+        alert(referrer);
+    }
+
+    getElement();
+</script>
+</body>
+</html>
