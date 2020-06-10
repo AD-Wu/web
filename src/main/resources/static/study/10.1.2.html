@@ -5,6 +5,23 @@
     <title>Document类型</title>
 </head>
 <body>
+<!-- document.write()/writeln()向网页输出流中写入数据-->
+<p>The current time is:
+    <script> document.write("<strong>" + (new Date()).toString() + "</strong>")</script>
+</p>
+
+<!-- 也可以动态地包含JS外部文件 -->
+<script>
+    document.write("<script src='xxx.js'><\/script>")// 结束标签要用转义字符
+</script>
+
+<!--如果在文档加载结束后再调用write,那么输出的内容会冲重写整个页面-->
+<p>Overwrite</p>
+<script>
+    window.onload = function () {
+        document.write("Hello World");
+    }
+</script>
 <script>
     function getElement() {
         // let html = document.documentElement;
@@ -31,7 +48,7 @@
         alert(referrer);
     }
 
-    getElement();
+    // getElement();
 </script>
 </body>
 </html>
