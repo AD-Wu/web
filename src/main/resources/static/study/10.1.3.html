@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Element类型</title>
+</head>
+<body>
+<div id="XDiv">
+    <p>
+        <strong>Hello World,now time is:</strong>
+        <script>
+            document.write(Date());
+        </script>
+    </p>
+</div>
+
+<script>
+    // let div = document.getElementById("XDiv");
+    // alert(div.tagName);
+    // alert("DIV" === div.nodeName);// div.nodeName===div.tagName:DIV，在HTML中标签始终都是大写，XML/XHTML则和源码一致
+    // alert(div.nodeName === div.tagName);
+
+    // 动态创建元素（在html中，createElement接收的参数不区分大小写）
+    // 创建div元素
+    let div = document.createElement("div");
+    // 设置div的id
+    // div.id = "newDiv";
+    // 设置div的样式（这里不是class）
+    // div.className = "ad";
+
+    // 创建段落元素（<p>元素）
+    let paragraph = document.createElement("p");
+
+    // 创建加粗文字的元素
+    let strong = document.createElement("strong");
+    // 创建文字内容
+    strong.innerText = "Hello World,now time is:";
+
+    // 创建script元素
+    let script = document.createElement("script");
+    // 添加script元素的方法
+    script.innerHTML = "document.write(Date());";
+
+    // 将<strong>元素和<script>元素加入<p>元素中
+    paragraph.appendChild(strong);
+    paragraph.appendChild(script);
+
+    // 将<p>元素追加到<div>元素中
+    div.appendChild(paragraph);
+
+    // 获取按钮元素
+    let button = document.getElementById("createButton");
+
+    // 将<div>元素追加到文档树的body中
+    document.body.insertBefore(div, button);
+
+
+</script>
+</body>
+</html>
