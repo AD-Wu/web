@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>焦点管理</title>
+</head>
+<body>
+<strong>Please input : </strong><input id="name" type="text" onfocus="getContent(this)">
+
+<script>
+    
+    function getContent(input) {
+        if (input.value != null) {
+            console.log(input.value);
+        }
+
+    }
+</script>
+
+</body>
+</html>

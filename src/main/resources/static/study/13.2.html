@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/html">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<br>
+<button id="x">Click me x</button>
+</br>
+<button id="xx">Click me xx</button>
+</br>
+<button id="xxx">Click me xxx</button>
+</br>
+<button id="xxxx">Click me xxx</button>
+</br>
+<a href="https://www.baidu.com">Baidu</a></br>
+<a id="prevent" href="https://www.baidu.com">Prevent to Baidu</a>
+
+</br>
+<button id="stop">stop propagation</button>
+
+</br>
+<button id="phase">event phase</button>
+<script>
+    let x = document.getElementById("x");
+    x.onclick = function () {
+        alert(this.id);
+    }
+
+    let xx = document.getElementById("xx");
+    xx.addEventListener("click", function () {
+        alert(this.id);
+    }, false);
+
+
+    // 兼容DOM的浏览器会将一个事件对象event传入到事件处理函数中
+    let xxx = document.getElementById("xxx");
+    xxx.onclick = function (event) {
+        alert(event.type);
+    }
+    xxx.addEventListener("click", function (event) {
+        alert(event.type);
+    }, false);
+
+    let xxxx = document.getElementById("xxxx");
+    let handler = function (event) {
+        switch (event.type) {
+            case "click":
+                alert("Click");
+                break;
+            case "mouseover":
+                event.target.style.backgroundColor = "red";
+                break;
+            case "mouseout":
+                event.target.style.backgroundColor = ""
+                break;
+        }
+    }
+    xxxx.onclick = handler;
+    xxxx.onmouseover = handler;
+    xxxx.onmouseout = handler;
+
+
+    // 取消事件的默认行为
+    let link = document.getElementById("prevent");
+    link.onclick = function (event) {
+        // 只有cancelable为true的事件才能取消其默认行为
+        alert(event.cancelable);// true
+        event.preventDefault();
+    }
+
+    let stop = document.getElementById("stop");
+    stop.onclick = function (event) {
+        // 当前目标是按钮，触发目标也是按钮
+        alert(event.currentTarget === event.target);// true
+        // 阻止冒泡传播到body
+        // event.stopPropagation();
+    }
+    document.body.onclick = function (event) {
+        // 当前目标是body，触发的目标是按钮
+        alert(event.currentTarget === event.target);// false
+    }
+
+    let phase = document.getElementById("phase");
+    phase.onclick = function (event) {
+        // 事件阶段处于2时，this===event.currentTarget===event.target
+        alert("事件目标，开始冒泡：" + event.eventPhase);// 2
+    }
+    // true表示允许事件捕获
+    document.body.addEventListener("click", function (event) {
+        alert("事件捕获：" + event.eventPhase);// 1
+    }, true);
+    document.body.onclick = function (event) {
+        alert("事件冒泡结束：" + event.eventPhase);// 3
+    }
+</script>
+</body>
+</html>
