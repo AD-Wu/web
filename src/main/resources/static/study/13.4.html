@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>事件</title>
+</head>
+<body>
+
+
+<div>
+    <button id="button">Click me</button></br>
+    <button id="keysButton">press ctrl | shift | alt | cmd,Click me</button>
+</div>
+
+<script src="EventHelper.js"></script>
+<script>
+    let button = document.getElementById("button");
+    EventHelper.addHandler(button, "click", function (event) {
+        event = EventHelper.getEvent(event);
+        alert("x:" + event.clientX + "; y:" + event.clientY);
+    })
+
+    let keysButton = document.getElementById("keysButton");
+    EventHelper.addHandler(keysButton, "click", function (event) {
+        event = EventHelper.getEvent(event);
+        let keys = [];
+        if (event.ctrlKey) {
+            keys.push("ctrl");
+        }
+        if (event.shiftKey) {
+            keys.push("shift");
+        }
+        if (event.altKey) {
+            keys.push("alt");
+        }
+        if (event.metaKey) {
+            keys.push("cmd");
+        }
+        alert("Keys:" + keys.join(","));
+    })
+</script>
+
+</body>
+</html>
