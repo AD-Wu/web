@@ -8,12 +8,22 @@
 
 
 <div>
-    <button id="button">Click me</button></br>
+    <button id="button">Click me</button>
+    </br>
     <button id="keysButton">press ctrl | shift | alt | cmd,Click me</button>
+    </br>
+    <input id="textArea">
 </div>
 
 <script src="EventHelper.js"></script>
 <script>
+    let text = document.getElementById("textArea");
+    EventHelper.addHandler(text, "keyup", function (event) {
+        event = EventHelper.getEvent(event);
+        console.log(event.key + ":" + event.keyCode);
+    })
+
+
     let button = document.getElementById("button");
     EventHelper.addHandler(button, "click", function (event) {
         event = EventHelper.getEvent(event);

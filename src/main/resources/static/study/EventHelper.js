@@ -50,6 +50,13 @@ let EventHelper = {
             }
         }
     },
+    getCharCode: function (event) {
+        if (typeof event.charCode == "number") {
+            return event.charCode;
+        } else {
+            return event.keyCode;
+        }
+    },
     getWheelDelta: function (event) {
         if (event.wheelDelta) {
             return (client.engine.opera && client.engine.opera < 9.5 ? -event.wheelDelta : event.wheelDelta);
