@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>ContextMenu Event Example</title>
+</head>
+<body>
+<div id="xDiv">Right click or Ctrl+click me to get a custom context menu.
+    Click anywhere else to get the default context menu.
+</div>
+<ul id="xMenu" style="position: absolute;visibility: hidden;background-color: silver">
+    <li><a href="https://www.google.com">Google</a></li>
+    <li><a href="https://cn.bing.com">Bing</a></li>
+    <li><a href="https://www.baidu.com">百度</a></li>
+    <li><a href="https://www.sogou.com">搜狗</a></li>
+</ul>
+<script src="EventHelper.js"></script>
+<script>
+    EventHelper.addHandler(window, "load", function (event) {
+        let div = document.getElementById("xDiv");
+
+        EventHelper.addHandler(div, "contextmenu", function (event) {
+            event = EventHelper.getEvent(event);
+            // 取消默认行为，保证不显示浏览器的上下文菜单。（阻止默认的右键事件冒泡，改变右击所显示的菜单）
+            EventHelper.preventDefault(event);
+            let menu = document.getElementById("xMenu");
+            menu.style.left = event.clientX + "px";
+            menu.style.top = event.clientY + "px";
+            menu.style.visibility = "visible";
+        });
+
+        EventHelper.addHandler(document, "click", function (event) {
+            document.getElementById("xMenu").style.visibility = "hidden";
+        });
+    });
+</script>
+</body>
+</html>

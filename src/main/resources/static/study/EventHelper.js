@@ -65,6 +65,7 @@ let EventHelper = {
             return -event.detail * 40;
         }
     },
+    // 阻止事件传播
     preventDefault: function (event) {
         if (event.preventDefault) {
             event.preventDefault();
