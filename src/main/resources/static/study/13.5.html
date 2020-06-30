@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>事件委托机制，提高性能</title>
+</head>
+<body>
+<div>
+    <ul id="listPanel">
+        <li id="goSomewhere">Go somewhere</li>
+        <li id="doSomething">Do something</li>
+        <li id="sayHi">Say Hi</li>
+    </ul>
+</div>
+<script src="EventHelper.js"></script>
+<script>
+    let panel = document.getElementById("listPanel");
+    /**
+     * 相比为每个可选区域添加onclick事件，事件委托机制技术更节省内存，性能更好。
+     * 事件越多，浏览器性能越差
+     */
+    EventHelper.addHandler(panel, "click", function (event) {
+        event = EventHelper.getEvent(event);
+        let target = EventHelper.getTarget(event);
+        switch (target.id) {
+            case "goSomewhere":
+                location.href = "https://www.baidu.com";
+                break;
+            case "doSomething":
+                document.title = "I changed the document's title";
+                break;
+            case "sayHi":
+                alert("Hello World");
+                break;
+        }
+    })
+</script>
+</body>
+</html>
