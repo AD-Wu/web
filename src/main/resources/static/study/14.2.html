@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>文本过滤</title>
+</head>
+<body>
+<form>
+    <h4>请输入</h4>
+    <textarea id="text" cols="25" rows="15"></textarea>
+</form>
+
+<script src="EventHelper.js"></script>
+<script>
+    let text = document.getElementById("text");
+    // 监听键盘按下事件，非数字的化不允许输入
+    EventHelper.addHandler(text, "keypress", function (event) {
+        event = EventHelper.getEvent(event);
+        let charCode = EventHelper.getCharCode(event);
+        if (!/\d/.test(String.fromCharCode(charCode)) && charCode > 9 && !event.ctrlKey) {
+            EventHelper.preventDefault(event);
+        }
+    });
+</script>
+</body>
+</html>

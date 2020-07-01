@@ -79,5 +79,21 @@ let EventHelper = {
         } else {
             event.cancelBubble = true;
         }
+    },
+    // 获取剪贴板数据
+    getClipboardText: function (event) {
+        //  IE 浏览器的clipboard属window对象所有
+        let clipboard = (event.clipboardData || window.clipboardData);
+        return clipboard.getData("text");
+    },
+    // 设置剪贴板数据，成功返回true，否则返回false
+    setClipboardText: function (event, value) {
+        if (event.clipboardData) {
+            // 非IE浏览器接受MIME类型数据
+            return event.clipboardData.setData("text/plain", value);
+        } else if (window.clipboardData) {
+            return window.clipboradData.setData("text", value);
+        }
     }
+
 }
