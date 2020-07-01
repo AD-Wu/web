@@ -92,7 +92,7 @@ let EventHelper = {
             // 非IE浏览器接受MIME类型数据
             return event.clipboardData.setData("text/plain", value);
         } else if (window.clipboardData) {
-            return window.clipboradData.setData("text", value);
+            return window.clipboardData.setData("text", value);
         }
     }
 
